@@ -837,29 +837,58 @@ export default class Carousel extends Component {
         return this._getScrollEnabled();
     }
 
+//     _onTouchStart () {
+//         const { onTouchStart } = this.props
+
+//         // `onTouchStart` is fired even when `scrollEnabled` is set to `false`
+//         if (this._getScrollEnabled() !== false && this._autoplaying) {
+//             this.pauseAutoPlay();
+//         }
+
+//         if (onTouchStart) {
+//             onTouchStart()
+//         }
+//     }
+
+//     _onTouchEnd () {
+//         const { onTouchEnd } = this.props
+
+//         if (this._getScrollEnabled() !== false && this._autoplay && !this._autoplaying) {
+//             // This event is buggy on Android, so a fallback is provided in _onScrollEnd()
+//             this.startAutoplay();
+//         }
+
+//         if (onTouchEnd) {
+//             onTouchEnd()
+//         }
+//     }
+
     _onTouchStart () {
         const { onTouchStart } = this.props
 
         // `onTouchStart` is fired even when `scrollEnabled` is set to `false`
-        if (this._getScrollEnabled() !== false && this._autoplaying) {
-            this.pauseAutoPlay();
+        if (this._getScrollEnabled() !== false && this._autoplaying && this.props.touchStopAutoplay) {
+            this.stopAutoplay();
         }
 
         if (onTouchStart) {
-            onTouchStart()
+            onTouchStart();
         }
     }
 
     _onTouchEnd () {
         const { onTouchEnd } = this.props
 
-        if (this._getScrollEnabled() !== false && this._autoplay && !this._autoplaying) {
-            // This event is buggy on Android, so a fallback is provided in _onScrollEnd()
-            this.startAutoplay();
-        }
+        // if (this._getScrollEnabled() !== false && this._autoplay && !this._autoplaying) {
+        //     // This event is buggy on Android, so a fallback is provided in _onScrollEnd()
+        //     console.log('start111');
+        //     this.startAutoplay();
+        // }
+
+        this.startAutoplay();
 
         if (onTouchEnd) {
-            onTouchEnd()
+            onTouchEnd();
         }
     }
 
